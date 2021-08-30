@@ -1,9 +1,48 @@
-
 .add-list {
     &__form {
+        position: absolute;
+
         width: 235px;
-        height: 140px;        
+        height: 140px;
+        padding: 18px;
+        
         background: #FFF;
-        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        box-sizing: border-box;
+    }
+
+    &__form-colors {
+        display: flex;
+        justify-content: space-between;
+        
+        margin-top: 9px;
+    }
+
+    &__form-close-btn {
+        position: absolute;
+        right: -7px;
+        top: -5px;
+        cursor: pointer;
+
+        height: 15px;
+    }
+
+    .button {
+        width: 100%;
+        margin-top: 9px;
+    }
+
+    .marker {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        border: 2px solid transparent;
+
+        cursor: pointer;
+
+        &.active {
+            border: 2px solid #7c7c7c;
+        }
     }
 }

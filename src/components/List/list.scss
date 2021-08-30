@@ -26,28 +26,5 @@
           display: inline-flex;
           margin-right: 10px;
         }
-  
-  
-        .marker {
-          position: relative;
-          width: 10px;
-          height: 10px;
-          border-radius: 30px;
-          margin-left: 5px;
-          margin-right: 2px;
-  
-          &--green {
-            background-color: #0add08 ;
-          }
-          &--pink {
-            background-color: #fc849c;
-          }
-          &--blue {
-            background-color: #64C4ED;
-          }
-          &--red {
-            background-color: rgb(230, 0, 0);
-          }
-        }
       }
   }

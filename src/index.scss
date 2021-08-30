@@ -31,3 +31,35 @@
     border-right: 1px solid #f1f1f1;
   }
 }
+
+
+.textarea {
+  background: #fff;
+  border: 1px solid #dadada;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 100%;
+
+  &:focus {
+    border-color: #bebebe;
+  }
+}
+
+.button {
+  background: rgb(248, 63, 134);
+  border-radius: 4px;
+  color: #fff;
+  padding: 10px 20px;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background: darken(rgb(248, 63, 134), 5%);
+  }
+  &:active {
+    background: darken(rgb(248, 63, 134), 15%);
+  }
+}

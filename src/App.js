@@ -1,6 +1,8 @@
 import List from './components/List/List';
 import AddList from './components/AddList/addList';
 
+import database from './assets/database.json';
+
 function App() {
   return (
     <div className="quests">
@@ -41,7 +43,7 @@ function App() {
           isRemovable
         />
 
-        <AddList />
+        <AddList colors={database.colors}/>
 
       </div>
       <div className="quests__tasks"></div>
