@@ -1,9 +1,23 @@
+import React from 'react';
 import List from './components/List/List';
 import AddList from './components/AddList/addList';
 
 import database from './assets/database.json';
 
 function App() {
+  const [lists, setList] = React.useState(
+    database.lists.map(item => {
+      item.color = database.colors.find(color => color.id === item.colorId).name;   //вытаскиваем из об-та св-во name
+      return item;
+    })
+  );
+
+  const onAddList = (obj) => {   //изменяем массив с об-тами списка задач
+    const newList = [...lists, obj];
+    console.log(newList);
+    setList(newList);
+  }
+
   return (
     <div className="quests">
       <div className="quests__sidebar">
@@ -20,30 +34,11 @@ function App() {
         />
 
         <List 
-          items={[
-            {
-              color: 'green',
-              name: 'Покупки',
-              active: true,
-            },
-            {
-              color: 'pink',
-              name: 'Обучение',
-            },
-            {
-              color: 'blue',
-              name: 'Спорт',
-            },
-            {
-              color: 'red',
-              name: 'Работа',
-            },
-          ]}
-
+          items={lists}
           isRemovable
         />
 
-        <AddList colors={database.colors}/>
+        <AddList onAdd={onAddList} colors={database.colors}/>
 
       </div>
       <div className="quests__tasks"></div>

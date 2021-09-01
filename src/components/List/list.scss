@@ -1,8 +1,16 @@
 .list {
-    margin-bottom: 30px;
+    margin-bottom: 18px;
+    max-height: 180px;
+    overflow: auto;
+    -ms-overflow-style: none;
 
-    &__add-button {
-      opacity: 0.5;
+      &::-webkit-scrollbar {
+          display: none;
+      }
+
+      &__add-button {
+        opacity: 0.5;
+
       &:hover {
         opacity: 1;
       }
@@ -12,8 +20,11 @@
         display: flex;
         align-items: center;
         padding: 10px 12px;
-        margin-bottom: 3px;
         cursor: pointer;
+
+        /*&:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }*/
   
         &.active {
           background: #FFFFFF;

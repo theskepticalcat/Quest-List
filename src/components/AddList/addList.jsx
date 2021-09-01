@@ -5,9 +5,18 @@ import './addList.scss'
 import closeSvg from '../../assets/icons/close.svg'
 
 
-const AddList = ({ colors }) => {
+const AddList = ({ colors, onAdd }) => {
     const [visibleListForm, setVisibleListForm] = React.useState(false);
     const [selectedColor, setColor] = React.useState(colors[0].id);   //дефолтно первый маркер будет выделен
+    const [inputValue, setInputValue] = React.useState('');   //пустое значение, т.к. инпут изначально пустой
+
+    const addList = () => {
+        if(!inputValue) {
+            alert('Введите название списка');
+            return;   //прерывается выполнение
+        }
+        onAdd({id: Math.random(), name: inputValue, colorId: null, color: colors.find(color => color.id === selectedColor).name });   //проверяем совпадает ли id цвета с тем цветом, что мы выбрали
+    }
 
     return (
         <div className="add-list">
@@ -26,6 +35,7 @@ const AddList = ({ colors }) => {
                     () => setVisibleListForm(true)   //Показываем модалку добавления нового списка
                 }
             />
+
             {visibleListForm && (   //Если visibleListForm у нас true, тогда отображается <div>
                 <div className="add-list__form">
                     <img 
@@ -34,20 +44,26 @@ const AddList = ({ colors }) => {
                         alt="Close button"
                         className="add-list__form-close-btn"
                     />
-                    <input type="text" className="textarea" placeholder="Название списка"></input>
+
+                    <input 
+                        value={inputValue}
+                        onChange={event => setInputValue(event.target.value)}
+                        type="text" 
+                        className="textarea" 
+                        placeholder="Название списка">
+                    </input>
+                    
                     <div className="add-list__form-colors">  
-                    {
-                        colors.map(color =>
+                    {colors.map(color =>
                             <Marker 
-                                onClick={() => setColor(color.id)}   //меняем состояние: null на id цвета
+                                onClick={() => setColor(color.id)}   //меняем состояние selectedColor: null на id цвета
                                 key={color.id} 
                                 color={color.name}
                                 className={selectedColor === color.id && 'active'}   //если выбраный цвет соответствует хотя бы одному color.id, тогда добавится .active
                             />
-                        )
-                    }
+                    )}
                     </div>
-                    <button className="button">Добавить</button>
+                    <button onClick={addList} className="button">Добавить</button>
                 </div>
             )}
         </div>
