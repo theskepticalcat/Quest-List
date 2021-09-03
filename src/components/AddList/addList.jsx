@@ -10,12 +10,24 @@ const AddList = ({ colors, onAdd }) => {
     const [selectedColor, setColor] = React.useState(colors[0].id);   //дефолтно первый маркер будет выделен
     const [inputValue, setInputValue] = React.useState('');   //пустое значение, т.к. инпут изначально пустой
 
+    //Если закрытие модалки по крестику:
+    const onClose = () => {
+        setVisibleListForm(false);
+        setInputValue('');
+        setColor(colors[0].id);
+    }
+
+    //Добавление нового названия списка:
     const addList = () => {
-        if(!inputValue) {
+        if(!inputValue) {   //если ничего не написали в input
             alert('Введите название списка');
             return;   //прерывается выполнение
         }
-        onAdd({id: Math.random(), name: inputValue, colorId: null, color: colors.find(color => color.id === selectedColor).name });   //проверяем совпадает ли id цвета с тем цветом, что мы выбрали
+        const color = colors.find(color => color.id === selectedColor).name;   //задаём название цвета  //проверяем совпадает ли id цвета с тем цветом, что мы выбрали
+        onAdd({id: Math.random(), name: inputValue, colorId: null, color: color });   //передаем об-кт нового эл-та списка в onAddList
+        setVisibleListForm(false);   //скрыть форму после добавления нового списка
+        setInputValue('');   //сбросим инпут
+        setColor(colors[0].id);   //сбросили выбранный цвет на серый
     }
 
     return (
@@ -38,12 +50,13 @@ const AddList = ({ colors, onAdd }) => {
 
             {visibleListForm && (   //Если visibleListForm у нас true, тогда отображается <div>
                 <div className="add-list__form">
+                    <div className="add-list__form-close-btn">
                     <img 
-                        onClick={() => setVisibleListForm(false)}
+                        onClick={onClose}
                         src={closeSvg}
                         alt="Close button"
-                        className="add-list__form-close-btn"
                     />
+                    </div>
 
                     <input 
                         value={inputValue}

@@ -1,21 +1,22 @@
 import React from 'react';
 import List from './components/List/List';
 import AddList from './components/AddList/addList';
+import Tasks from './components/Tasks/Tasks';
 
 import database from './assets/database.json';
 
 function App() {
-  const [lists, setList] = React.useState(
-    database.lists.map(item => {
+  const [lists, setList] = React.useState(   //в стэйте хранится то, что есть в json
+    database.lists.map(item => {   //создаём новое св-во color в каждом об-те (в соответствии с colorId)
       item.color = database.colors.find(color => color.id === item.colorId).name;   //вытаскиваем из об-та св-во name
       return item;
     })
   );
 
-  const onAddList = (obj) => {   //изменяем массив с об-тами списка задач
-    const newList = [...lists, obj];
-    console.log(newList);
-    setList(newList);
+  //Изменяем массив с об-тами списка задач:
+  const onAddList = (obj) => {   //сюда передаем новый об-кт, сгенерированный в addList.jsx
+    const newList = [...lists, obj];   //пересоздаём массив
+    setList(newList);   //заменяем стэйт (значение переменной lists)
   }
 
   return (
@@ -35,13 +36,17 @@ function App() {
 
         <List 
           items={lists}
+          onRemove={(item) => console.log(item)}
           isRemovable
         />
 
         <AddList onAdd={onAddList} colors={database.colors}/>
 
       </div>
-      <div className="quests__tasks"></div>
+
+      <div className="quests__tasks">
+        <Tasks />
+      </div>
     </div>
   );
 }

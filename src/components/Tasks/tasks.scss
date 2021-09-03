@@ -1,0 +1,84 @@
+.tasks {
+    &__title {
+      font-family: Montserrat;
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 39px;
+      color: #64c4ed;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e6e6e6;
+
+      &:hover img {
+          opacity: 0.5;
+      }
+    }
+
+    img {
+        cursor: pointer;
+        margin-left: 15px;
+        opacity: 0;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &__items {
+        margin-top: 30px;
+
+        &-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+
+            p {
+                margin-left: 15px;
+            }
+        }
+    }
+
+    &__checkbox {
+        input {
+            display: none;
+        }
+
+        label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 20px;
+        height: 20px;
+
+        border: 2px solid #64c4ed;
+        border-radius: 30px;
+        cursor: pointer;
+
+            svg {
+                position: relative;
+                left: 0.5px;
+                opacity: 0;
+            }
+
+            &:hover {
+                background-color: #f2f2f2;
+                border-color: #f2f2f2;
+                svg {
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        input:checked + label {   //если инпут checked, элемент справа меняет цвет
+            background-color: #4dd599;
+            border-color: #4dd599;
+
+            svg {
+                opacity: 1;
+                path {
+                    stroke: #fff;
+                }
+            }
+        }
+    }
+}

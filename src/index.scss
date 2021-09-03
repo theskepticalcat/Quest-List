@@ -11,6 +11,7 @@
 
 .quests {
   position: absolute;
+  display: flex;
   left: 50%;
   top: 50%;
   width: 750px;
@@ -26,9 +27,14 @@
     width: 200px;
     height: 100%;
 
-    padding: 60px 20px;
+    padding: 40px 20px;
     background-color: rgba(254,189,192, 0.5);
     border-right: 1px solid #f1f1f1;
+  }
+
+  &__tasks {
+    flex: 1;
+    padding: 60px;
   }
 }
 
