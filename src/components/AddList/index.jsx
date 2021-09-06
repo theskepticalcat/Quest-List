@@ -1,14 +1,24 @@
 import React from 'react';
-import List from '../List/List';
-import Marker from '../Marker/Marker';
+import List from '../List';
+import Marker from '../Marker';
+import axios from 'axios';
+
 import './addList.scss'
+
 import closeSvg from '../../assets/icons/close.svg'
 
 
 const AddList = ({ colors, onAdd }) => {
-    const [visibleListForm, setVisibleListForm] = React.useState(false);
-    const [selectedColor, setColor] = React.useState(colors[0].id);   //дефолтно первый маркер будет выделен
+    const [visibleListForm, setVisibleListForm] = React.useState(false);   //стэйт мини-формы добавления нового листа
+    const [selectedColor, setColor] = React.useState(3);
     const [inputValue, setInputValue] = React.useState('');   //пустое значение, т.к. инпут изначально пустой
+    const [isLoading, setIsLoading] = React.useState(false);   //стэйт отправки на сервер нового листа
+
+    React.useEffect(() => {
+        if (Array.isArray(colors)) {   //если colors является массивом
+            setColor(colors[0].id);   //применить по умолчанию первый маркер цвета
+        }
+    }, [colors]);   //если colors изменился, то выз-тся ф-ция
 
     //Если закрытие модалки по крестику:
     const onClose = () => {
@@ -23,11 +33,22 @@ const AddList = ({ colors, onAdd }) => {
             alert('Введите название списка');
             return;   //прерывается выполнение
         }
-        const color = colors.find(color => color.id === selectedColor).name;   //задаём название цвета  //проверяем совпадает ли id цвета с тем цветом, что мы выбрали
-        onAdd({id: Math.random(), name: inputValue, colorId: null, color: color });   //передаем об-кт нового эл-та списка в onAddList
-        setVisibleListForm(false);   //скрыть форму после добавления нового списка
-        setInputValue('');   //сбросим инпут
-        setColor(colors[0].id);   //сбросили выбранный цвет на серый
+
+        setIsLoading(true);   //перед тем как отправить запрос -> загрузка
+
+        axios.post('http://localhost:3001/lists', {   //отправка запроса //доб-ем новую сущность - об-кт
+            name: inputValue,
+            colorId: setColor
+        })
+        .then(({ data }) => {
+            const color = colors.find(color => color.id === setColor).name;   //задаём название цвета  //проверяем совпадает ли id цвета с тем цветом, что мы выбрали
+            const listObj = { ...data, color: { name: color } };   //все св-ва из ответа + новый об-кт color
+            onAdd(listObj);   //передаем об-кт нового эл-та списка в onAddList
+            onClose();
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
     }
 
     return (
@@ -76,7 +97,11 @@ const AddList = ({ colors, onAdd }) => {
                             />
                     )}
                     </div>
-                    <button onClick={addList} className="button">Добавить</button>
+                    <button 
+                        onClick={addList} 
+                        className="button">
+                        {isLoading ? 'Добавление...' : 'Добавить'}
+                    </button>
                 </div>
             )}
         </div>

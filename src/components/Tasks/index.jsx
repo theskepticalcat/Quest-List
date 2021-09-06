@@ -1,26 +1,32 @@
 import './tasks.scss';
 import penSvg from '../../assets/icons/pen.svg';
 
-const Tasks = () => {
+const Tasks = ({ list }) => {
     return (
         <div className="tasks">
             <h2 className="tasks__title">
-              Работа
+              {list.name}
               <img src={penSvg} alt="Edit"/>
             </h2>
 
             <div className="tasks__items">
 
-                <div className="tasks__items-item">
+                {list.tasks.map(task => (
+                    <div key={task.id} className="tasks__items-item">
                     <div className="tasks__checkbox">
-                        <input id="check" type="checkbox"/>
-                        <label htmlFor="check">
-                            <svg width="11" 
+                        <input 
+                            id={`task-${task.id}`} 
+                            type="checkbox"
+                        />
+                        <label htmlFor={`task-${task.id}`}>
+                            <svg 
+                                width="11" 
                                 height="8" 
                                 viewBox="0 0 11 8" 
                                 fill="none" 
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" 
+                                <path 
+                                    d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" 
                                     stroke="#000" 
                                     strokeWidth="1.5" 
                                     strokeLinecap="round" 
@@ -30,9 +36,9 @@ const Tasks = () => {
                         </label>
                     </div>
 
-                    <p>Написать логику для модального окна</p>
+                    <input readOnly value={task.text} />
                 </div>
-
+                ))}
             </div>
         </div>
     );

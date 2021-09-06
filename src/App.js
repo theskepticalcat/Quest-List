@@ -1,28 +1,32 @@
 import React from 'react';
-import List from './components/List/List';
-import AddList from './components/AddList/addList';
-import Tasks from './components/Tasks/Tasks';
-
-import database from './assets/database.json';
+import axios from 'axios';
+import { List, AddList, Tasks } from './components';
 
 function App() {
-  const [lists, setList] = React.useState(   //в стэйте хранится то, что есть в json
-    database.lists.map(item => {   //создаём новое св-во color в каждом об-те (в соответствии с colorId)
-      item.color = database.colors.find(color => color.id === item.colorId).name;   //вытаскиваем из об-та св-во name
-      return item;
+  const [lists, setLists] = React.useState(null);
+  const [colors, setColors] = React.useState(null);
+
+
+  React.useEffect(() => {   //как только компонент отрендерится, я хочу отправить этот запрос
+    axios.get('http://localhost:3001/lists').then( ({ data }) => {   //из response берем только data (деструктуризацией)
+    setLists(data);   //устанавливается новый стэйт
     })
-  );
+    axios.get('http://localhost:3001/colors').then( ({ data }) => {
+    setColors(data);
+    })
+  }, []);
+
 
   //Изменяем массив с об-тами списка задач:
-  const onAddList = (obj) => {   //сюда передаем новый об-кт, сгенерированный в addList.jsx
+  const onAddList = obj => {   //сюда передаем новый об-кт, сгенерированный в addList.jsx
     const newList = [...lists, obj];   //пересоздаём массив
-    setList(newList);   //заменяем стэйт (значение переменной lists)
+    setLists(newList);   //заменяем стэйт (значение переменной lists)
   }
 
+  
   return (
     <div className="quests">
       <div className="quests__sidebar">
-
         <List 
           items={[
             {
@@ -34,18 +38,30 @@ function App() {
           ]}
         />
 
-        <List 
-          items={lists}
-          onRemove={(item) => console.log(item)}
-          isRemovable
+        {lists ? (
+          <List 
+            items={lists}
+            onRemove={id => {
+              const newLists = lists.filter(item => item.id !== id);   //исключаем айтем из нового массива
+              setLists(newLists);   //уже новый массив айтемов передаём в стэйт (lists)
+            }}
+            isRemovable
+          />
+          ) : (
+            'Загрузка...'
+          )
+        }
+
+        <AddList 
+          onAdd={onAddList} 
+          colors={colors}
         />
-
-        <AddList onAdd={onAddList} colors={database.colors}/>
-
       </div>
 
       <div className="quests__tasks">
-        <Tasks />
+        {lists && 
+          <Tasks list={lists[1]} />
+        }
       </div>
     </div>
   );
