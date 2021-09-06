@@ -8,11 +8,14 @@ function App() {
 
 
   React.useEffect(() => {   //как только компонент отрендерится, я хочу отправить этот запрос
-    axios.get('http://localhost:3001/lists').then( ({ data }) => {   //из response берем только data (деструктуризацией)
-    setLists(data);   //устанавливается новый стэйт
+    axios
+    .get('http://localhost:3001/lists?_expand=color&_embed=tasks')
+    .then( ({ data }) => {   //из response берем только data (деструктуризацией)
+      setLists(data);   //устанавливается новый стэйт
     })
-    axios.get('http://localhost:3001/colors').then( ({ data }) => {
-    setColors(data);
+    axios.get('http://localhost:3001/colors')
+    .then( ({ data }) => {
+      setColors(data);
     })
   }, []);
 
@@ -38,18 +41,16 @@ function App() {
           ]}
         />
 
-        {lists ? (
-          <List 
+        {lists 
+        ? ( <List 
             items={lists}
             onRemove={id => {
               const newLists = lists.filter(item => item.id !== id);   //исключаем айтем из нового массива
               setLists(newLists);   //уже новый массив айтемов передаём в стэйт (lists)
             }}
             isRemovable
-          />
-          ) : (
-            'Загрузка...'
-          )
+          /> )
+        : ('Загрузка...')
         }
 
         <AddList 
@@ -59,8 +60,10 @@ function App() {
       </div>
 
       <div className="quests__tasks">
-        {lists && 
-          <Tasks list={lists[1]} />
+        {lists &&    //tasks не рендерится пока ничего нет в lists
+          <Tasks 
+            list={lists[1]} 
+          />
         }
       </div>
     </div>

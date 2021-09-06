@@ -21,7 +21,7 @@ const List = ({ items, isRemovable, onClick, onRemove }) => {
                 items.map((item, index) => 
                     <li 
                         key={index}
-                        className={classNames(item.className, { 'active': item.active } )}
+                        className={classNames(item.className, { active: item.active } )}
                     >
                         <i>
                             {item.icon 
@@ -30,7 +30,7 @@ const List = ({ items, isRemovable, onClick, onRemove }) => {
                             }
                         </i>
                         <span>{item.name}</span>
-                        {isRemovable &&  ( //отображение крестиков в списке
+                        {isRemovable &&  ( //отображение крестиков удаления в списке
                             <img 
                                 src={removeSvg} 
                                 className="list__remove-icon" 

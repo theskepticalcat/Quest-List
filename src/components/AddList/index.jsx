@@ -38,10 +38,10 @@ const AddList = ({ colors, onAdd }) => {
 
         axios.post('http://localhost:3001/lists', {   //отправка запроса //доб-ем новую сущность - об-кт
             name: inputValue,
-            colorId: setColor
+            colorId: selectedColor
         })
         .then(({ data }) => {
-            const color = colors.find(color => color.id === setColor).name;   //задаём название цвета  //проверяем совпадает ли id цвета с тем цветом, что мы выбрали
+            const color = colors.find(color => color.id === selectedColor).name;   //задаём название цвета  //проверяем совпадает ли id цвета с тем цветом, что мы выбрали
             const listObj = { ...data, color: { name: color } };   //все св-ва из ответа + новый об-кт color
             onAdd(listObj);   //передаем об-кт нового эл-та списка в onAddList
             onClose();
@@ -84,18 +84,18 @@ const AddList = ({ colors, onAdd }) => {
                         onChange={event => setInputValue(event.target.value)}
                         type="text" 
                         className="textarea" 
-                        placeholder="Название списка">
-                    </input>
+                        placeholder="Название списка"
+                    />
                     
                     <div className="add-list__form-colors">  
-                    {colors.map(color =>
+                    {colors.map(color => (
                             <Marker 
                                 onClick={() => setColor(color.id)}   //меняем состояние selectedColor: null на id цвета
                                 key={color.id} 
                                 color={color.name}
                                 className={selectedColor === color.id && 'active'}   //если выбраный цвет соответствует хотя бы одному color.id, тогда добавится .active
                             />
-                    )}
+                    ))}
                     </div>
                     <button 
                         onClick={addList} 
