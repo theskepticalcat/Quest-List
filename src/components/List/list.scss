@@ -29,14 +29,25 @@
           border-radius: 4px;
         }
 
-        span {
+        .list__item-name {
           flex: 1;
+        }
+        .list__item-task-count {
+          opacity: 0.4;
+        }
+
+        span {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+
+          margin-right: 10px;
         }
   
         
         i {
           display: inline-flex;
-          margin-right: 10px;
+          margin-right: 6px;
         }
 
         &:hover .list__remove-icon {

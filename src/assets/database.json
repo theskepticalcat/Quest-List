@@ -24,6 +24,11 @@
       "name": "Покупки",
       "colorId": 6,
       "id": 6
+    },
+    {
+      "name": "Улучшение проекта на JavaScript",
+      "colorId": 8,
+      "id": 7
     }
   ],
   "tasks": [

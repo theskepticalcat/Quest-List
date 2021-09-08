@@ -62,7 +62,7 @@ function App() {
       <div className="quests__tasks">
         {lists &&    //tasks не рендерится пока ничего нет в lists
           <Tasks 
-            list={lists[1]} 
+            list={lists[0]} 
           />
         }
       </div>

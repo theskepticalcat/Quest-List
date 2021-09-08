@@ -29,7 +29,10 @@ const List = ({ items, isRemovable, onClick, onRemove }) => {
                             : <Marker color={item.color.name}/>
                             }
                         </i>
-                        <span>{item.name}</span>
+                        <span className="list__item-name">{item.name}</span>
+                        <span className="list__item-task-count">
+                            {item.tasks && ` ${item.tasks.length}`}   {/*если есть у об-кта tasks, то отобрази...*/}
+                        </span>
                         {isRemovable &&  ( //отображение крестиков удаления в списке
                             <img 
                                 src={removeSvg} 
