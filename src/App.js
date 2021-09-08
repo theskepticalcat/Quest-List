@@ -5,6 +5,7 @@ import { List, AddList, Tasks } from './components';
 function App() {
   const [lists, setLists] = React.useState(null);
   const [colors, setColors] = React.useState(null);
+  const [activeItem, setActiveItem] = React.useState(null);
 
 
   React.useEffect(() => {   //как только компонент отрендерится, я хочу отправить этот запрос
@@ -30,7 +31,7 @@ function App() {
   return (
     <div className="quests">
       <div className="quests__sidebar">
-        <List 
+        <List
           items={[
             {
               icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="7C7C7C" xmlns="http://www.w3.org/2000/svg">
@@ -41,15 +42,19 @@ function App() {
           ]}
         />
 
+        {console.log(activeItem)}
+
         {lists 
-        ? ( <List 
+        ? (<List 
             items={lists}
             onRemove={id => {
               const newLists = lists.filter(item => item.id !== id);   //исключаем айтем из нового массива
               setLists(newLists);   //уже новый массив айтемов передаём в стэйт (lists)
             }}
             isRemovable
-          /> )
+            onClickItem={item => setActiveItem(item)}   //получили айтем и передали его в стэйт
+            activeItem={activeItem}   //полученный айтем передаём в компонент
+          />)
         : ('Загрузка...')
         }
 
@@ -60,9 +65,9 @@ function App() {
       </div>
 
       <div className="quests__tasks">
-        {lists &&    //tasks не рендерится пока ничего нет в lists
-          <Tasks 
-            list={lists[0]} 
+        {lists && activeItem  //tasks не рендерится пока ничего нет в lists
+          && <Tasks 
+            list={activeItem} 
           />
         }
       </div>

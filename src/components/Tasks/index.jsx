@@ -10,9 +10,9 @@ const Tasks = ({ list }) => {
             </h2>
 
             <div className="tasks__items">
-                {
-                    list.tasks.map(task => (
-                        <div key={task.id} className="tasks__items-item">
+                {!list.tasks.length && <h2>Нет новых задач</h2>}   {/*если отрицательное значение количества тасков*/}
+                {list.tasks.map(task => (
+                    <div key={task.id} className="tasks__items-item">
                         <div className="tasks__checkbox">
                             <input 
                                 id={`task-${task.id}`}   //каждый таск уникален

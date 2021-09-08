@@ -5,7 +5,7 @@ import axios from 'axios';
 import removeSvg from '../../assets/icons/close.svg';
 
 
-const List = ({ items, isRemovable, onClick, onRemove }) => {
+const List = ({ items, isRemovable, onClick, onClickItem, activeItem, onRemove }) => {
 
     const removeListQuestion = (item) => {
         if(window.confirm('Вы действительно хотите удалить список?')) {
@@ -21,7 +21,8 @@ const List = ({ items, isRemovable, onClick, onRemove }) => {
                 items.map((item, index) => 
                     <li 
                         key={index}
-                        className={classNames(item.className, { active: item.active } )}
+                        className={classNames(item.className, { active: activeItem && activeItem.id === item.id} )}
+                        onClick={onClickItem ?  () => onClickItem(item)  : null}   //если ф-ция есть в листе, то она вызывается
                     >
                         <i>
                             {item.icon 

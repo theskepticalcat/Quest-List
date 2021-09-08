@@ -16,9 +16,9 @@
       "colorId": 1
     },
     {
-      "id": 5,
       "name": "Спорт",
-      "colorId": 3
+      "colorId": 3,
+      "id": 5
     },
     {
       "name": "Покупки",
@@ -26,9 +26,14 @@
       "id": 6
     },
     {
-      "name": "Улучшение проекта на JavaScript",
-      "colorId": 8,
+      "name": "Еще",
+      "colorId": 7,
       "id": 7
+    },
+    {
+      "name": "Новое",
+      "colorId": 8,
+      "id": 8
     }
   ],
   "tasks": [
