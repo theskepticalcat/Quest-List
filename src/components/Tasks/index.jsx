@@ -1,12 +1,32 @@
 import './tasks.scss';
 import penSvg from '../../assets/icons/pen.svg';
+import axios from 'axios';
 
-const Tasks = ({ list }) => {
+const Tasks = ({ list, onEditTitle }) => {
+
+    //Изменение названия списка:
+    const editTitle = () => {
+        const newTitle = window.prompt('Название списка', list.name);
+        if(newTitle) {   //если пользователь что-то ввёл
+            onEditTitle(list.id, newTitle);   //меняется состояние
+            axios.patch('http://localhost:3001/lists/' + list.id, {   //изменяем название в базе //изменение по указанному list.id
+                name: newTitle
+            }).catch(() => {
+                alert("Не удалось изменить название");
+            });
+        }
+    }
+
+
     return (
         <div className="tasks">
             <h2 className="tasks__title">
               {list.name}
-              <img src={penSvg} alt="Edit"/>
+                <img 
+                    onClick={editTitle} 
+                    src={penSvg} 
+                    alt="Edit"
+                />
             </h2>
 
             <div className="tasks__items">

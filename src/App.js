@@ -24,10 +24,21 @@ function App() {
   //Изменяем массив с об-тами списка задач:
   const onAddList = obj => {   //сюда передаем новый об-кт, сгенерированный в addList.jsx
     const newList = [...lists, obj];   //пересоздаём массив
-    setLists(newList);   //заменяем стэйт (значение переменной lists)
+    setLists(newList);   //заменяем стэйт lists
   }
 
+  //Изменяем название списка тасков:
+  const onEditListTitle = (id, title) => {
+    const newList = lists.map(item => {   //получаем состояние со списками -> пересоздаем его
+      if(item.id === id) {   //если id айтема = id переданному
+        item.name = title;
+      }
+      return item;
+    });
+    setLists(newList);
+  }
   
+
   return (
     <div className="quests">
       <div className="quests__sidebar">
@@ -67,7 +78,8 @@ function App() {
       <div className="quests__tasks">
         {lists && activeItem  //tasks не рендерится пока ничего нет в lists
           && <Tasks 
-            list={activeItem} 
+            list={activeItem}
+            onEditTitle={onEditListTitle}
           />
         }
       </div>
