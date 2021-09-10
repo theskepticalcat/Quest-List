@@ -68,4 +68,22 @@
   &:active {
     background: darken(rgb(248, 63, 134), 15%);
   }
+  &:disabled {
+    background: rgb(166, 181, 196);
+  }
+
+  &--grey {
+    background:rgb(235, 235, 235);
+    color: rgb(122, 122, 122);
+
+    &:hover {
+      background: darken(rgb(235, 235, 235), 2%);
+      color: darken(rgb(122, 122, 122), 5%);
+    }
+
+    &:active {
+      background: darken(rgb(235, 235, 235), 4%);
+      color: darken(rgb(122, 122, 122), 7%);
+    }
+  }
 }

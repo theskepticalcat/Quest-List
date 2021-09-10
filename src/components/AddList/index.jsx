@@ -45,6 +45,8 @@ const AddList = ({ colors, onAdd }) => {
             const listObj = { ...data, color: { name: color } };   //все св-ва из ответа + новый об-кт color
             onAdd(listObj);   //передаем об-кт нового эл-та списка в onAddList
             onClose();
+        }).catch(() => {
+            alert("Упс! Ошибка при добавлении списка")
         })
         .finally(() => {
             setIsLoading(false);

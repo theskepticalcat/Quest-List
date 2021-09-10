@@ -1,8 +1,10 @@
 import './tasks.scss';
 import penSvg from '../../assets/icons/pen.svg';
 import axios from 'axios';
+import AddTaskForm from './AddTaskForm';
 
-const Tasks = ({ list, onEditTitle }) => {
+
+const Tasks = ({ list, onEditTitle, onAddTask }) => {
 
     //Изменение названия списка:
     const editTitle = () => {
@@ -16,7 +18,6 @@ const Tasks = ({ list, onEditTitle }) => {
             });
         }
     }
-
 
     return (
         <div className="tasks">
@@ -60,6 +61,10 @@ const Tasks = ({ list, onEditTitle }) => {
                     </div>
                     ))
                 }
+                <AddTaskForm 
+                    list={list} 
+                    onAddTask={onAddTask}
+                />
             </div>
         </div>
     );

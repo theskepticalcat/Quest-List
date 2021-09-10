@@ -11,17 +11,18 @@
       &:hover img {
           opacity: 0.5;
       }
-    }
 
-    img {
+      img {
         cursor: pointer;
         margin-left: 15px;
         opacity: 0;
 
-        &:hover {
-            opacity: 1;
+            &:hover {
+                opacity: 1;
+            }
         }
     }
+
 
     &__items {
         margin-top: 30px;
@@ -45,6 +46,7 @@
             }
         }
     }
+
 
     &__checkbox {
         input {
@@ -87,6 +89,41 @@
                 path {
                     stroke: #fff;
                 }
+            }
+        }
+    }
+
+    &__form {
+        margin-top: 25px;
+
+        &-new {
+            display: flex;
+            align-items: center;
+            margin-left: 4px;
+            opacity: 0.4;
+            cursor: pointer;
+            transition: opacity 0.1s linear;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            img {
+                width: 15px;
+            }
+
+            span {
+                font-size: 0.9rem;
+                margin-left: 12px;
+            }
+        }
+
+        &-fields {
+            margin-top: 15px;
+
+            button {
+                margin-right: 5px;
+                margin-top: 5px;
             }
         }
     }
