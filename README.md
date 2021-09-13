@@ -1,5 +1,7 @@
 Stack:
 
-ReactJS (useState, useReducer, useEffect);
+ReactJS (useState, useEffect, useHistory);
+
+React Router;
 
 Axios (для имитации работы с сервером)
