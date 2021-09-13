@@ -5,7 +5,7 @@ import axios from 'axios';
 import removeSvg from '../../assets/icons/close.svg';
 
 
-const List = ({ items, isRemovable, onClick, onClickItem, activeItem, onRemove }) => {
+const List = ({ items, isRemovable, onClick, onClickItem, activeItem, onRemove, useHistory }) => {
 
     const removeListQuestion = (item) => {
         if(window.confirm('Вы действительно хотите удалить список?')) {
@@ -18,7 +18,7 @@ const List = ({ items, isRemovable, onClick, onClickItem, activeItem, onRemove }
     return (
         <ul onClick={onClick} className="list">
             { 
-                items.map((item, index) => 
+                items.map((item, index) => (
                     <li 
                         key={index}
                         className={classNames(item.className, { 
@@ -46,7 +46,7 @@ const List = ({ items, isRemovable, onClick, onClickItem, activeItem, onRemove }
                             />
                         )}
                     </li>
-                )
+                ))
             }
         </ul>
     )

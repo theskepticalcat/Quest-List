@@ -26,7 +26,7 @@
       "id": 6
     },
     {
-      "name": "Еще",
+      "name": "Встречи",
       "colorId": 7,
       "id": 7
     }
@@ -79,6 +79,12 @@
       "text": "ggggg",
       "completed": false,
       "id": 8
+    },
+    {
+      "listId": 2,
+      "text": "ReactJS Hooks (useState, useReducer, useEffect и т.д.), ReactJS Hooks (useState, useReducer, useEffect и т.д.), ReactJS Hooks (useState, useReducer, useEffect и т.д.)",
+      "completed": false,
+      "id": 9
     }
   ],
   "colors": [

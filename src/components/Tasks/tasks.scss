@@ -1,9 +1,14 @@
 .tasks {
+    &:not(:last-of-type) {
+        margin-bottom: 70px;
+    }
+
     &__title {
       font-family: Montserrat;
       font-weight: bold;
       font-size: 32px;
       line-height: 39px;
+
       color: #64c4ed;
       padding-bottom: 10px;
       border-bottom: 1px solid #e6e6e6;
@@ -40,6 +45,12 @@
             display: flex;
             align-items: center;
             margin-bottom: 15px;
+
+            input {
+                border: none;
+                width: 100%;
+                margin-left: 7px;
+            }
 
             p {
                 margin-left: 15px;

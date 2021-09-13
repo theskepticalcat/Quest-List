@@ -4,7 +4,7 @@ import axios from 'axios';
 import AddTaskForm from './AddTaskForm';
 
 
-const Tasks = ({ list, onEditTitle, onAddTask }) => {
+const Tasks = ({ list, onEditTitle, onAddTask, noEmptyLists }) => {
 
     //Изменение названия списка:
     const editTitle = () => {
@@ -21,7 +21,7 @@ const Tasks = ({ list, onEditTitle, onAddTask }) => {
 
     return (
         <div className="tasks">
-            <h2 className="tasks__title">
+            <h2 style={{color: list.color.hex}} className="tasks__title">   {/**цвет заголовка соответствует цвету маркера списка в сайдбаре */}
               {list.name}
                 <img 
                     onClick={editTitle} 
@@ -31,7 +31,7 @@ const Tasks = ({ list, onEditTitle, onAddTask }) => {
             </h2>
 
             <div className="tasks__items">
-                {!list.tasks.length && <h2>Нет новых задач</h2>}   {/*если отрицательное значение количества тасков*/}
+                {!noEmptyLists && !list.tasks.length && <h2>Нет новых задач</h2>}   {/*если нет флага noEmptyLists И отрицательное значение количества тасков*/}
                 {list.tasks.map(task => (
                     <div key={task.id} className="tasks__items-item">
                         <div className="tasks__checkbox">

@@ -23,6 +23,7 @@
   font-size: 14px;
   overflow: hidden;
 
+
   &__sidebar {
     width: 200px;
     height: 100%;
@@ -35,6 +36,13 @@
   &__tasks {
     flex: 1;
     padding: 60px;
+
+    overflow: auto;
+    -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+          display: none;
+      }
   }
 }
 

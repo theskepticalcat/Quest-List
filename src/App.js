@@ -1,11 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import { Route, useHistory } from 'react-router-dom';
+
 import { List, AddList, Tasks } from './components';
+import { useEffect } from 'react';
+
 
 function App() {
   const [lists, setLists] = React.useState(null);
   const [colors, setColors] = React.useState(null);
   const [activeItem, setActiveItem] = React.useState(null);
+  let history = useHistory();
 
 
   React.useEffect(() => {   //как только компонент отрендерится, я хочу отправить этот запрос
@@ -52,12 +57,25 @@ function App() {
     });
     setLists(newList);
   }
+
+
+  //Показ тасков соответствующих выбранному листу:
+  useEffect(() => {   //узнать какой пропс изменился
+    const listId = history.location.pathname.split('lists/')[1];   //1 элемент об-та, который нам вернет split  //=>получаем индекс listId
+    if(lists) {   //проверка если не null
+      const list = lists.find(list => list.id === Number(listId));   //listId изначально строка
+      setActiveItem(list);
+    }
+  }, [history.location.pathname]);
   
 
   return (
     <div className="quests">
       <div className="quests__sidebar">
         <List
+        onClickItem={list => {
+          history.push(`/`)   //'Все задачи' переходять на этот адрес
+        }}
           items={[
             {
               active: true,
@@ -69,8 +87,6 @@ function App() {
           ]}
         />
 
-        {console.log(activeItem)}
-
         {lists 
         ? (<List 
             items={lists}
@@ -79,7 +95,9 @@ function App() {
               setLists(newLists);   //уже новый массив айтемов передаём в стэйт (lists)
             }}
             isRemovable
-            onClickItem={item => setActiveItem(item)}   //получили айтем и передали его в стэйт
+            onClickItem={list => {   //при клике на любой из айтемов в этом компониенте =>
+              history.push(`/list/${list.id}`)   //вызывается push и в историю переходов по роуту доб-тся новый переход
+            }}
             activeItem={activeItem}   //полученный айтем передаём в компонент
           />)
         : ('Загрузка...')
@@ -92,13 +110,30 @@ function App() {
       </div>
 
       <div className="quests__tasks">
-        {lists && activeItem  //tasks не рендерится пока ничего нет в lists
-          && <Tasks 
-            list={activeItem}
-            onEditTitle={onEditListTitle}
-            onAddTask={onAddTask}
-          />
-        }
+        <Route exact path="/">   {/**рендерим все списки */}
+          {
+            lists &&   //проверяем не null ли lists
+              lists.map(list => (
+                <Tasks
+                key={list.id}
+                list={list}
+                onEditTitle={onEditListTitle}
+                onAddTask={onAddTask}
+                noEmptyLists
+                />
+              ))
+          }
+        </Route>
+
+        <Route path="/lists/:id">
+          {lists && activeItem  //есть все списки и мы какой-то список выбрали
+            && (<Tasks 
+              list={activeItem}
+              onEditTitle={onEditListTitle}
+              onAddTask={onAddTask}
+            />)
+          }
+        </Route>
       </div>
     </div>
   );
