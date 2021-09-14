@@ -26,7 +26,7 @@ const AddTaskForm = ({ list, onAddTask }) => {
         axios.post('http://localhost:3001/tasks', newTask).then(({ data }) => {
             onAddTask(list.id, data);   //и прокидываем данные сюда
             toggleForm();
-        }).catch(() => {
+        }).catch(e => {
             alert("Упс! Ошибка при добавлении задачи")
         })
         .finally(() => {

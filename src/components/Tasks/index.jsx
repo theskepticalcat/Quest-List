@@ -5,7 +5,6 @@ import AddTaskForm from './AddTaskForm';
 
 
 const Tasks = ({ list, onEditTitle, onAddTask, noEmptyLists }) => {
-
     //Изменение названия списка:
     const editTitle = () => {
         const newTitle = window.prompt('Название списка', list.name);
@@ -31,8 +30,9 @@ const Tasks = ({ list, onEditTitle, onAddTask, noEmptyLists }) => {
             </h2>
 
             <div className="tasks__items">
-                {!noEmptyLists && !list.tasks.length && <h2>Нет новых задач</h2>}   {/*если нет флага noEmptyLists И отрицательное значение количества тасков*/}
-                {list.tasks.map(task => (
+                {!noEmptyLists && list.tasks && !list.tasks.length && <h2>Нет новых задач</h2>}   {/*если нет флага noEmptyLists И отрицательное значение количества тасков*/}
+                {list.tasks && 
+                    list.tasks.map(task => (
                     <div key={task.id} className="tasks__items-item">
                         <div className="tasks__checkbox">
                             <input 
@@ -61,7 +61,8 @@ const Tasks = ({ list, onEditTitle, onAddTask, noEmptyLists }) => {
                     </div>
                     ))
                 }
-                <AddTaskForm 
+                <AddTaskForm
+                    key={list.id}
                     list={list} 
                     onAddTask={onAddTask}
                 />
