@@ -3,6 +3,7 @@ import penSvg from '../../assets/icons/pen.svg';
 import axios from 'axios';
 import AddTaskForm from './AddTaskForm';
 import Task from './Task';
+import { Link } from 'react-router-dom';
 
 
 const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, onComplete, noEmptyLists }) => {
@@ -22,14 +23,16 @@ const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, onComplete, noEmpty
 
     return (
         <div className="tasks">
-            <h2 style={{color: list.color.hex}} className="tasks__title">   {/**цвет заголовка соответствует цвету маркера списка в сайдбаре */}
-              {list.name}
-                <img 
-                    onClick={editTitle} 
-                    src={penSvg} 
-                    alt="Edit"
-                />
-            </h2>
+            <Link to={`/lists/${list.id}`}>   {/**возможность перехода по клику на заголовок списка через все задачи */}
+                <h2 style={{color: list.color.hex}} className="tasks__title">   {/**цвет заголовка соответствует цвету маркера списка в сайдбаре */}
+                {list.name}
+                    <img 
+                        onClick={editTitle} 
+                        src={penSvg} 
+                        alt="Edit"
+                    />
+                </h2>
+            </Link>
 
             <div className="tasks__items">
                 {!noEmptyLists && list.tasks && !list.tasks.length && <h2>Нет новых задач</h2>}   {/*если нет флага noEmptyLists И отрицательное значение количества тасков*/}
