@@ -44,7 +44,7 @@ const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, noEmptyLists }) => 
                     ))
                 }
                 <AddTaskForm
-                    key={list.id}
+                    key={list.id}   //по этому ключу решает нужно ли сделать ре-рендер
                     list={list} 
                     onAddTask={onAddTask}
                 />

@@ -31,29 +31,17 @@
       "id": 7
     },
     {
-      "name": "ffff",
-      "colorId": 5,
+      "name": "test",
+      "colorId": 8,
       "id": 8
     }
   ],
   "tasks": [
     {
-      "id": 1,
-      "listId": 2,
-      "text": "Изучить JavaScript",
-      "completed": true
-    },
-    {
       "id": 2,
       "listId": 2,
       "text": "Изучить паттерны проектирования",
       "completed": false
-    },
-    {
-      "listId": 2,
-      "text": "ReactJS Hooks (useState, useReducer, useEffect и т.д.), ReactJS Hooks (useState, useReducer, useEffect и т.д.), ReactJS Hooks (useState, useReducer, useEffect и т.д.)",
-      "completed": false,
-      "id": 9
     },
     {
       "listId": 3,
@@ -84,6 +72,36 @@
       "text": "Биткоин",
       "completed": false,
       "id": 14
+    },
+    {
+      "listId": 8,
+      "text": "test test test",
+      "completed": false,
+      "id": 15
+    },
+    {
+      "listId": 2,
+      "text": "Дописать удаление квестов в приложении",
+      "completed": false,
+      "id": 16
+    },
+    {
+      "listId": 3,
+      "text": "Фрагменты анархистской антропологии",
+      "completed": false,
+      "id": 17
+    },
+    {
+      "listId": 5,
+      "text": "Пресс",
+      "completed": false,
+      "id": 18
+    },
+    {
+      "listId": 7,
+      "text": "С реальностью",
+      "completed": false,
+      "id": 19
     }
   ],
   "colors": [

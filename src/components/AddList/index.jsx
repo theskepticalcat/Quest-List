@@ -41,8 +41,8 @@ const AddList = ({ colors, onAdd }) => {
             colorId: selectedColor
         })
         .then(({ data }) => {
-            const color = colors.find(color => color.id === selectedColor).name;   //задаём название цвета  //проверяем совпадает ли id цвета с тем цветом, что мы выбрали
-            const listObj = { ...data, color: { name: color } };   //все св-ва из ответа + новый об-кт color
+            const color = colors.find(color => color.id === selectedColor);   //задаём название цвета  //проверяем совпадает ли id цвета с тем цветом, что мы выбрали
+            const listObj = { ...data, color, tasks: [] };   //все св-ва из ответа + новый об-кт color
             onAdd(listObj);   //передаем об-кт нового эл-та списка в onAddList
             onClose();
         }).catch(() => {

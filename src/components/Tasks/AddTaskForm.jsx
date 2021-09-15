@@ -18,13 +18,13 @@ const AddTaskForm = ({ list, onAddTask }) => {
     //Добавление нового таска:
     const addTask = () => {
         const newTask = {   //формируем об-кт нового таска
-            "listId": list.id,   //указываем в какой именно список нужно добавить
+            "listId": list.id,   //указываем в какой именно список нужно добавить->
             "text": inputValue,
             "completed": false
         };
         setIsSending(true);
         axios.post('http://localhost:3001/tasks', newTask).then(({ data }) => {
-            onAddTask(list.id, data);   //и прокидываем данные сюда
+            onAddTask(list.id, data);   //->и прокидываем данные сюда
             toggleForm();
         }).catch(e => {
             alert("Упс! Ошибка при добавлении задачи")
