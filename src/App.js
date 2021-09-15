@@ -78,6 +78,31 @@ function App() {
   }
 
 
+  //Завершен или незавершен таск:
+  const onComplete = (listId, taskId, completed) => {
+    const newList = lists.map(list => {
+      if (list.id === listId) {
+        list.tasks = list.tasks.map(task => {
+          if(task.id === taskId) {
+            task.completed = completed;
+          }
+          return task;
+        });
+      }
+      return list;
+    });
+
+    setLists(newList);
+
+    axios.patch('http://localhost:3001/tasks/' + taskId, {
+      completed: completed,
+    })
+    .catch(() => {
+      alert("Не удалось пометить как завершенное");
+    });
+  }
+
+
   //Показ тасков соответствующих выбранному листу:
   React.useEffect(() => {   //узнать какой пропс изменился
     const listId = location.pathname.split('lists/')[1];   //1 элемент об-та, который нам вернет split  //=>получаем индекс listId
@@ -142,6 +167,7 @@ function App() {
                 onEditTitle={onEditListTitle}
                 onAddTask={onAddTask}
                 onRemoveTask={onRemoveTask}
+                onComplete={onComplete}
                 noEmptyLists
                 />
               ))
@@ -156,6 +182,7 @@ function App() {
               onEditTitle={onEditListTitle}
               onAddTask={onAddTask}
               onRemoveTask={onRemoveTask}
+              onComplete={onComplete}
             />
           )}
         </Route>

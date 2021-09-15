@@ -46,7 +46,7 @@
     {
       "listId": 3,
       "text": "Совершенный Код",
-      "completed": false,
+      "completed": true,
       "id": 10
     },
     {
@@ -64,7 +64,7 @@
     {
       "listId": 6,
       "text": "Пшено",
-      "completed": false,
+      "completed": true,
       "id": 13
     },
     {
@@ -82,7 +82,7 @@
     {
       "listId": 2,
       "text": "Дописать удаление квестов в приложении",
-      "completed": false,
+      "completed": true,
       "id": 16
     },
     {
@@ -94,13 +94,13 @@
     {
       "listId": 5,
       "text": "Пресс",
-      "completed": false,
+      "completed": true,
       "id": 18
     },
     {
       "listId": 7,
       "text": "С реальностью",
-      "completed": false,
+      "completed": true,
       "id": 19
     }
   ],

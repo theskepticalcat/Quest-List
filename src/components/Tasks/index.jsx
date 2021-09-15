@@ -5,7 +5,7 @@ import AddTaskForm from './AddTaskForm';
 import Task from './Task';
 
 
-const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, noEmptyLists }) => {
+const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, onComplete, noEmptyLists }) => {
     
     //Изменение названия списка:
     const editTitle = () => {
@@ -40,6 +40,7 @@ const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, noEmptyLists }) => 
                             task={task}
                             list={list}   //чтобы таск знал свой родительский список
                             onRemove={onRemoveTask}
+                            onComplete={onComplete}
                         />
                     ))
                 }

@@ -1,10 +1,19 @@
-const Task = ({ task, list, onRemove }) => {
+const Task = ({ task, list, onRemove, onComplete }) => {
+
+    //Обработчик для помеченного таска:
+    const onChangeCheckbox = e => {
+        console.log(list.id, task.id, e.target.checked);
+        onComplete(list.id, task.id, e.target.checked);
+    }
+
     return (
         <div key={task.id} className="tasks__items-item">
             <div className="tasks__checkbox">
-                <input 
+                <input
+                    onChange={onChangeCheckbox}
                     id={`task-${task.id}`}   //каждый таск уникален
                     type="checkbox"
+                    checked={task.completed}
                 />
                 <label htmlFor={`task-${task.id}`}>
                     <svg 
