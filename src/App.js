@@ -47,6 +47,25 @@ function App() {
   }
 
 
+  //Удаление отдельно таска в листе:
+  const onRemoveTask = (listId, taskId) => {
+    if (window.confirm("Вы действительно хотите удалить задачу?")) {   //если true
+      const newList = lists.map(item => {
+        if (item.id === listId) {   //нашли нужный список
+          item.tasks = item.tasks.filter(task => task.id !== taskId);   //заменить все задачи в списке НА список задач без удаленной задачи
+        }
+        return item;
+      });
+      setLists(newList);   //сначала заменим стэйт, потом удалим на сервере
+
+      axios.delete('http://localhost:3001/tasks/' + taskId)  //удаляем таск из базы данных
+      .catch(() => {
+        alert("Не удалось удалить квест");
+      });
+    }
+  }
+
+
   //Изменяем название списка тасков:
   const onEditListTitle = (id, title) => {
     const newList = lists.map(item => {   //получаем состояние со списками -> пересоздаем его
@@ -67,7 +86,7 @@ function App() {
       const list = lists.find(list => list.id === Number(listId));   //listId изначально строка
       setActiveItem(list);
     }
-  }, [lists, location.pathname]);
+  }, [lists, location.pathname]);   //следит за этими изменениями
   
   console.log(location.pathname);
 
@@ -122,6 +141,7 @@ function App() {
                 list={list}
                 onEditTitle={onEditListTitle}
                 onAddTask={onAddTask}
+                onRemoveTask={onRemoveTask}
                 noEmptyLists
                 />
               ))
@@ -135,8 +155,9 @@ function App() {
               list={activeItem}
               onEditTitle={onEditListTitle}
               onAddTask={onAddTask}
-            />)
-          }
+              onRemoveTask={onRemoveTask}
+            />
+          )}
         </Route>
       </div>
     </div>
